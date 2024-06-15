@@ -25,7 +25,6 @@ model User {
   updatedAt      DateTime? @updatedAt
 }
 
-// EVENTS
 enum EventType {
   ERROR
   USER
@@ -50,4 +49,26 @@ model Event {
   viewed       Boolean   @default(false)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
+}
+
+model ContactFormSubmission {
+  id            String   @id @default(uuid())
+  firstName     String
+  lastName      String
+  email         String
+  businessName  String?
+  projectType   ProjectType
+  phoneNumber   String?
+  location      String?
+  message       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum ProjectType {
+  WEB
+  APP
+  SOFTWARE
+  CIRCUITS
+  OTHER
 }
