@@ -14,7 +14,7 @@ import {
 
 export const getAllContactRequests = async (req, res) => {
   console.log('getAllContactRequests');
-  
+
   try {
     const foundRequests = await findAllContactRequests();
     if (!foundRequests) {
@@ -80,7 +80,51 @@ export const createNewContactRequest = async (req, res) => {
     return sendDataResponse(res, 201, 'OK');
   } catch (err) {
     // Error
-    const serverError = new ServerErrorEvent(req.user, `Create contact request failed`);
+    const serverError = new ServerErrorEvent(
+      req.user,
+      `Create contact request failed`
+    );
+    myEmitterErrors.emit('error', serverError);
+    sendMessageResponse(res, serverError.code, serverError.message);
+    throw err;
+  }
+};
+
+export const deleteContactRequest = async (req, res) => {
+  console.log('deleteContactRequest');
+  const { contactId } = req.params;
+
+  try {
+    const foundRequest = await prisma.contactRequest.findUnique({
+      where: {
+        id: contactId,
+      },
+    });
+
+    if (!foundRequest) {
+      const notFound = new NotFoundEvent(
+        req.user,
+        'Contact request not found',
+        'The contact request with the specified ID was not found.'
+      );
+      myEmitterErrors.emit('error', notFound);
+      return sendMessageResponse(res, notFound.code, notFound.message);
+    }
+
+    await prisma.contactRequest.delete({
+      where: {
+        id: contactId,
+      },
+    });
+
+    return sendDataResponse(res, 200, {
+      message: 'Contact request deleted successfully.',
+    });
+  } catch (err) {
+    const serverError = new ServerErrorEvent(
+      req.user,
+      'Delete contact request'
+    );
     myEmitterErrors.emit('error', serverError);
     sendMessageResponse(res, serverError.code, serverError.message);
     throw err;

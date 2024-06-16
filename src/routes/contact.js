@@ -4,7 +4,7 @@ import {
   validateAdminRole,
   validateDeveloperRole,
 } from '../middleware/auth.js';
-import { getAllContactRequests } from '../controllers/contact.js';
+import { createNewContactRequest, deleteContactRequest, getAllContactRequests } from '../controllers/contact.js';
 
 const router = Router();
 
