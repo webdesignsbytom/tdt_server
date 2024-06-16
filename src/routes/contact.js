@@ -4,6 +4,7 @@ import {
   validateAdminRole,
   validateDeveloperRole,
 } from '../middleware/auth.js';
+import { getAllContactRequests } from '../controllers/contact.js';
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get(
   '/',
   validateAuthentication,
   validateAdminRole,
-  getAllContactRequest
+  getAllContactRequests
 );
 router.post('/contact-submit', createNewContactRequest);
 router.delete(

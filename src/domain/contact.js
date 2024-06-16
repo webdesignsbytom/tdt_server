@@ -6,3 +6,26 @@ export const findAllContactRequests = () =>
       createdAt: 'desc',
     },
   });
+
+export const postContactRequest = (
+  firstName,
+  lastName,
+  email,
+  businessName,
+  projectType,
+  phoneNumber,
+  location,
+  message
+) =>
+  dbClient.contactFormSubmission.create({
+    data: {
+      firstName,
+      lastName,
+      email,
+      businessName,
+      projectType,
+      phoneNumber,
+      location,
+      message,
+    },
+  });
