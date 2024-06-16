@@ -1,4 +1,4 @@
-import { findAllContactRequests } from '../domain/contact.js';
+import { findAllContactRequests, postContactRequest } from '../domain/contact.js';
 import { myEmitterErrors } from '../event/errorEvents.js';
 import {
   BadRequestEvent,
@@ -56,12 +56,17 @@ export const createNewContactRequest = async (req, res) => {
       return sendMessageResponse(res, missingField.code, missingField.message);
     }
 
+    const validProjectTypes = ['WEB', 'APP', 'SOFTWARE', 'CIRCUITS', 'OTHER'];
+    if (projectType && !validProjectTypes.includes(projectType)) {
+      throw new Error(`Invalid projectType: ${projectType}`);
+    }
+
     const createdContactRequest = await postContactRequest(
       firstName,
       lastName,
       email,
       businessName,
-      projectType,
+      projectType || null,
       phoneNumber,
       location,
       message

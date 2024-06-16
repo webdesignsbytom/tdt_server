@@ -57,7 +57,7 @@ model ContactFormSubmission {
   lastName      String
   email         String
   businessName  String?
-  projectType   ProjectType
+  projectType   ProjectType?
   phoneNumber   String?
   location      String?
   message       String
