@@ -1,0 +1,53 @@
+.
+|____.env
+|____.gitignore
+|____file_structure.txt
+|____package-lock.json
+|____package.json
+|____prisma
+| |____migrations
+| | |____20240615230113_init2
+| | | |____migration.sql
+| | |____20240615230244_init23
+| | | |____migration.sql
+| | |____20240616153038_contact
+| | | |____migration.sql
+| | |____20240616153337_tst
+| | | |____migration.sql
+| | |____migration_lock.toml
+| |____schema.prisma
+| |____seed.js
+|____src
+| |____controllers
+| | |____contact.js
+| | |____users.js
+| |____domain
+| | |____contact.js
+| | |____users.js
+| |____event
+| | |____contactEvents.js
+| | |____errorEvents.js
+| | |____eventsLog.js
+| | |____utils
+| | | |____contactUtils.js
+| | | |____errorUtils.js
+| | | |____eventLogUtils.js
+| |____middleware
+| | |____auth.js
+| |____routes
+| | |____contact.js
+| | |____users.js
+| |____server.js
+| |____utils
+| | |____config.js
+| | |____dbClient.js
+| | |____eventEmitter.js
+| | |____prisma.js
+| | |____responses.js
+| | |____sendEmail.js
+| | |____tokens.js
+| |____views
+| | |____404.html
+| | |____email.handlebars
+| | |____index.html
+|____vercel.json
