@@ -34,7 +34,7 @@ app.use('/contact', contactRouter);
 // Server interface page
 app.get('/', (req, res) => {
   res.sendFile('index.html', {
-    root: join(__dirname, '..', 'views'),
+    root: join(__dirname, 'views'),
   });
 });
 
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 app.all('*', (req, res) => {
   res.status(404);
   if (req.accepts('html')) {
-    res.sendFile(join(__dirname, '..', 'views', '404.html'));
+    res.sendFile(join(__dirname, 'views', '404.html'));
   } else if (req.accepts('json')) {
     res.json({ message: '404 Not Found' });
   } else {
